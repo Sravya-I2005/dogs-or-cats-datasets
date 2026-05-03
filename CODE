@@ -1,0 +1,62 @@
+# kmeans_customer_segmentation.py
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+
+# Load dataset
+# Example columns: CustomerID, Annual_Income, Spending_Score
+data = pd.read_csv("customers.csv")
+
+# Select features
+X = data[['Annual_Income', 'Spending_Score']]
+
+# Feature scaling
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Elbow method to find optimal K
+wcss = []
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i, random_state=42, n_init=10)
+    kmeans.fit(X_scaled)
+    wcss.append(kmeans.inertia_)
+
+# Plot elbow graph
+plt.plot(range(1, 11), wcss)
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS')
+plt.title('Elbow Method')
+plt.show()
+
+# Train model with optimal K (e.g., 5)
+kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
+clusters = kmeans.fit_predict(X_scaled)
+
+# Add cluster labels
+data['Cluster'] = clusters
+
+# Visualize clusters
+plt.scatter(data['Annual_Income'], data['Spending_Score'], c=clusters)
+plt.xlabel('Annual Income')
+plt.ylabel('Spending Score')
+plt.title('Customer Segments')
+plt.show()
+
+# Save results
+data.to_csv("clustered_customers.csv", index=False)
+
+print("Clustering completed. Output saved to clustered_customers.csv")
+###SAMPLE DATASETS...
+CustomerID,Annual_Income,Spending_Score
+1,15,39
+2,16,81
+3,17,6
+4,18,77
+5,19,40
+6,20,76
+7,21,6
+8,22,94
+9,23,3
+10,24,72
