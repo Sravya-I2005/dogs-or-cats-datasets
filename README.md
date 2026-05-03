@@ -1,27 +1,24 @@
-# dogs-or-cats-datasets
-# 🛍️ Customer Segmentation using K-Means Clustering
+# 🐶🐱 Cats vs Dogs Classification using SVM
 
 ## 📌 Overview
 
-This project applies **K-Means Clustering** to group retail store customers based on their purchasing behavior.
+This project uses a **Support Vector Machine (SVM)** to classify images of cats and dogs.
 
 ## 🎯 Objective
 
-Segment customers into distinct groups to:
-
-* Understand buying patterns
-* Improve marketing strategies
-* Target specific customer segments
+Build a basic image classifier using traditional machine learning techniques.
 
 ---
 
 ## 📂 Project Structure
 
 ```
-├── customers.csv
-├── kmeans_customer_segmentation.py
-├── clustered_customers.csv
-├── README.md
+dataset/
+   cats/
+   dogs/
+
+svm_cats_dogs.py
+README.md
 ```
 
 ---
@@ -29,61 +26,60 @@ Segment customers into distinct groups to:
 ## ⚙️ Installation
 
 ```bash
-pip install pandas matplotlib scikit-learn
+pip install numpy opencv-python scikit-learn
 ```
 
 ---
 
 ## ▶️ Usage
 
-Run the script:
-
 ```bash
-python kmeans_customer_segmentation.py
+python svm_cats_dogs.py
 ```
 
 ---
 
-## 📊 Methodology
+## 🧠 Methodology
 
-1. Data preprocessing
-2. Feature scaling
-3. Finding optimal clusters using Elbow Method
-4. Applying K-Means clustering
-5. Visualization of clusters
-
----
-
-## 📈 Features Used
-
-* Annual Income
-* Spending Score
+1. Load images from dataset
+2. Resize images to fixed size (64x64)
+3. Convert to grayscale
+4. Flatten images into vectors
+5. Train SVM classifier
+6. Evaluate accuracy
 
 ---
 
-## 📉 Output
+## 📊 Model Details
 
-* Clustered dataset saved as `clustered_customers.csv`
-* Visualization of customer segments
+* Algorithm: Support Vector Machine (SVM)
+* Kernel: Linear
+* Input: Flattened image pixels
 
 ---
 
-## 🧪 Example Insight
+## 📈 Output
 
-* High income + high spending → Premium customers
-* Low income + low spending → Budget customers
+* Classification accuracy printed in console
+
+---
+
+## ⚠️ Limitations
+
+* Low accuracy compared to deep learning
+* Cannot capture spatial features effectively
 
 ---
 
 ## 🔮 Future Improvements
 
-* Use more features (age, purchase frequency)
-* Apply hierarchical clustering
-* Deploy dashboard using Streamlit
-* Use silhouette score for evaluation
+* Use CNN (TensorFlow / PyTorch)
+* Data augmentation
+* Hyperparameter tuning (RBF kernel)
+* Feature extraction (HOG, PCA)
 
 ---
 
 ## 📜 License
 
-Open-source and free to use.
+Free to use for learning purposes.
